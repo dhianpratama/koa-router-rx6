@@ -41,16 +41,7 @@ class KoaRouterRx extends Router {
   private _handleContext<B> (epic: Epic<object, B>) {
     return (ctx: Context) => {
       epic(of(ctx))
-        .subscribe(
-          (payload) => {
-            ctx.response.status = ctx.response.status !== 404 ? ctx.response.status : 200;
-            ctx.response.body = payload;
-          },
-          (err: Error) => {
-            ctx.response.status = ctx.response.status !== 404 ? ctx.response.status : 500;
-            ctx.response.body = err.stack;
-          },
-        );
+        .subscribe();
     };
   }
 
